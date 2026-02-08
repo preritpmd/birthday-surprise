@@ -14,11 +14,13 @@
 
 html,body{
   margin:0;
-  height:100%;
+  min-height:100%;
   font-family:"Inter",system-ui,sans-serif;
   background:#05060f;
-  overflow:hidden;
+  overflow-x:hidden;
+  overflow-y:auto;
   color:var(--text);
+  scroll-behavior:smooth;
 }
 
 /* BACKGROUND */
@@ -33,7 +35,7 @@ html,body{
   z-index:0;
 }
 
-/* FIREWORK CANVAS */
+/* FIREWORKS */
 canvas{
   position:fixed;
   inset:0;
@@ -45,82 +47,58 @@ canvas{
 #password-screen{
   position:fixed;
   inset:0;
-  z-index:3;
+  z-index:10;
   display:flex;
   align-items:center;
   justify-content:center;
   background:rgba(5,6,15,.85);
-  backdrop-filter:blur(18px);
+  backdrop-filter:blur(20px);
 }
 
 .password-box{
-  text-align:center;
   padding:40px 30px;
   border-radius:28px;
   background:rgba(255,255,255,.08);
   box-shadow:0 30px 80px rgba(0,0,0,.6);
-  animation:fadeIn 1.2s ease;
+  text-align:center;
 }
 
 .password-box h1{
-  font-size:32px;
-  margin-bottom:10px;
   background:linear-gradient(90deg,var(--gold),#fff);
   -webkit-background-clip:text;
   color:transparent;
 }
 
-.password-box p{
-  opacity:.8;
-  margin-bottom:25px;
-}
-
 .password-box input{
   width:240px;
-  padding:12px 16px;
-  border-radius:18px;
+  padding:12px;
+  border-radius:16px;
   border:none;
   outline:none;
-  font-size:16px;
   text-align:center;
+  font-size:16px;
 }
 
 .password-box button{
   margin-top:20px;
-  padding:12px 28px;
-  border-radius:20px;
+  padding:12px 26px;
+  border-radius:18px;
   border:none;
   cursor:pointer;
   background:linear-gradient(90deg,var(--gold),#fff);
-  font-size:15px;
 }
 
 .error{
-  margin-top:15px;
   color:#ff9aa2;
+  margin-top:10px;
   display:none;
-}
-
-.shake{
-  animation:shake .4s;
-}
-
-@keyframes shake{
-  0%,100%{transform:translateX(0)}
-  25%{transform:translateX(-6px)}
-  75%{transform:translateX(6px)}
-}
-
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(.95)}
-  to{opacity:1;transform:scale(1)}
 }
 
 /* MAIN LAYOUT */
 main{
   position:relative;
   z-index:2;
-  height:100%;
+  min-height:100vh;
   display:grid;
   grid-template-rows:auto 1fr auto;
   padding:40px 24px;
@@ -139,7 +117,6 @@ header h1{
 
 header h2{
   margin-top:10px;
-  font-size:18px;
   font-weight:300;
   opacity:.85;
 }
@@ -148,8 +125,8 @@ header h2{
 .center{
   display:flex;
   flex-direction:column;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
 }
 
 /* CANDLE */
@@ -215,9 +192,9 @@ header h2{
 }
 
 @keyframes flicker{
-  0%{transform:translateX(-50%) scale(1) rotate(-1deg)}
-  50%{transform:translateX(-50%) scale(1.1) rotate(1deg)}
-  100%{transform:translateX(-50%) scale(1) rotate(-1deg)}
+  0%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(1.1)}
+  100%{transform:translateX(-50%) scale(1)}
 }
 
 .smoke{
@@ -243,8 +220,9 @@ header h2{
 /* POSTER */
 .poster{
   display:none;
+  width:100%;
   max-width:520px;
-  margin-top:30px;
+  margin-top:40px;
   animation:reveal 1.6s ease forwards;
 }
 
@@ -262,7 +240,7 @@ header h2{
 footer{
   text-align:center;
   max-width:520px;
-  margin:0 auto;
+  margin:40px auto 0;
   font-size:16px;
   line-height:1.6;
   opacity:.9;
@@ -275,14 +253,13 @@ footer{
 <div class="bg"></div>
 <canvas id="fireworks"></canvas>
 
-<!-- 🔐 PASSWORD SCREEN -->
+<!-- PASSWORD -->
 <div id="password-screen">
-  <div class="password-box" id="box">
+  <div class="password-box">
     <h1>Private Access</h1>
-    <p>Enter the password to continue</p>
     <input type="password" id="password" placeholder="Password">
     <br>
-    <button onclick="checkPassword()">Unlock</button>
+    <button onclick="unlock()">Unlock</button>
     <div class="error" id="error">Wrong password</div>
   </div>
 </div>
@@ -290,8 +267,7 @@ footer{
 <main>
   <header>
     <h1>Happy Birthday</h1>
-    <!-- ✏️ CHANGE NAME -->
-    <h2>Dear Alex</h2>
+    <h2>Dear Amulya</h2> <!-- CHANGE NAME -->
   </header>
 
   <section class="center">
@@ -307,29 +283,21 @@ footer{
     </div>
   </section>
 
-  <!-- ✏️ CHANGE MESSAGE -->
   <footer>
-    May your days be calm, meaningful, and filled with warmth.  
-    May joy follow you quietly, always.
+    May your life be filled with warmth, clarity, and quiet happiness.
+    May every step ahead feel meaningful and beautiful.
   </footer>
 </main>
 
 <script>
-/* 🔑 CHANGE PASSWORD HERE */
-const PASSWORD = "birthday123";
-
-/* PASSWORD CHECK */
-function checkPassword(){
+/* PASSWORD */
+const PASSWORD="9320943495";
+function unlock(){
   const input=document.getElementById("password").value;
-  const error=document.getElementById("error");
-  const box=document.getElementById("box");
-
   if(input===PASSWORD){
     document.getElementById("password-screen").style.display="none";
   }else{
-    error.style.display="block";
-    box.classList.add("shake");
-    setTimeout(()=>box.classList.remove("shake"),400);
+    document.getElementById("error").style.display="block";
   }
 }
 
@@ -347,7 +315,7 @@ window.onresize=resize;
 function firework(x,y){
   const colors=["#d4af37","#ffffff","#c77dff"];
   const p=[];
-  for(let i=0;i<55;i++){
+  for(let i=0;i<50;i++){
     p.push({
       x,y,
       a:Math.random()*Math.PI*2,
@@ -373,24 +341,17 @@ function firework(x,y){
 }
 
 setInterval(()=>{
-  firework(Math.random()*canvas.width,Math.random()*canvas.height*.55);
+  firework(Math.random()*canvas.width,Math.random()*canvas.height*.6);
 },2000);
 
-/* BLOW */
+/* CANDLE */
 function blow(){
   document.getElementById("flame")?.remove();
   document.getElementById("smoke").classList.add("active");
   document.getElementById("poster").style.display="block";
-
-  for(let i=0;i<5;i++){
-    setTimeout(()=>firework(
-      Math.random()*canvas.width,
-      Math.random()*canvas.height*.55
-    ),i*400);
-  }
+  document.getElementById("poster").scrollIntoView({behavior:"smooth"});
 }
 </script>
 
 </body>
 </html>
-

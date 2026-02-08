@@ -2,372 +2,326 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Amulya 🎉</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Poppins:wght@400;500&display=swap" rel="stylesheet">
 
 <style>
-:root{
-  --gold:#d4af37;
-  --text:rgba(255,255,255,.9);
-}
+*{margin:0;padding:0;box-sizing:border-box}
 
-*{box-sizing:border-box}
-
-html,body{
-  margin:0;
-  min-height:100%;
-  font-family:"Inter",system-ui,sans-serif;
-  background:#05060f;
+body{
+  font-family:'Poppins',sans-serif;
+  background:radial-gradient(circle at top,#0b1d3a,#050b18,#000);
+  color:#ffd36b;
   overflow-x:hidden;
-  overflow-y:auto;
-  color:var(--text);
-  scroll-behavior:smooth;
 }
 
-/* ===== BACKGROUND ===== */
-.bg{
+/* ================= DECORATIONS ================= */
+.shape{
   position:fixed;
-  inset:0;
-  background:
-    radial-gradient(circle at 20% 10%,#1a1d3a,transparent 60%),
-    radial-gradient(circle at 80% 30%,#2a1b3d,transparent 55%),
-    radial-gradient(circle at 50% 80%,#11152d,transparent 60%);
-  z-index:0;
-}
-
-/* ===== FIREWORKS ===== */
-canvas{
-  position:fixed;
-  inset:0;
-  z-index:1;
-  opacity:.45;
-}
-
-/* ===== BALLOONS ===== */
-.balloons{
-  position:fixed;
-  inset:0;
-  z-index:1;
+  opacity:.35;
   pointer-events:none;
-  overflow:hidden;
+  animation:float 16s linear infinite;
+}
+.circle{width:140px;height:140px;border:2px solid gold;border-radius:50%}
+.heart{font-size:26px;color:#ff6f91}
+.star{font-size:22px;color:#ffd36b}
+
+@keyframes float{
+  from{transform:translateY(120vh) rotate(0deg)}
+  to{transform:translateY(-160vh) rotate(360deg)}
 }
 
+/* SPARKLES */
+.sparkle{
+  position:fixed;
+  width:4px;height:4px;
+  background:#9ecbff;
+  border-radius:50%;
+  animation:spark 6s linear infinite;
+}
+@keyframes spark{
+  from{transform:translateY(100vh);opacity:0}
+  to{transform:translateY(-120vh);opacity:1}
+}
+
+/* BALLOONS */
 .balloon{
-  position:absolute;
+  position:fixed;
   bottom:-120px;
-  width:48px;
-  height:62px;
-  border-radius:50% 50% 48% 48%;
-  animation:floatUp linear infinite;
-  opacity:.85;
+  width:36px;height:48px;
+  border-radius:50%;
+  animation:rise 14s linear infinite;
 }
-
 .balloon::after{
   content:"";
   position:absolute;
-  bottom:-35px;
+  bottom:-20px;
   left:50%;
-  width:2px;
-  height:35px;
-  background:rgba(255,255,255,.4);
-  transform:translateX(-50%);
+  width:1px;height:20px;
+  background:white;
+}
+@keyframes rise{
+  to{transform:translateY(-160vh)}
 }
 
-@keyframes floatUp{
-  from{transform:translateY(0)}
-  to{transform:translateY(-130vh)}
+/* CONFETTI */
+.confetti{
+  position:fixed;
+  width:8px;height:8px;
+  animation:confetti 6s linear infinite;
+}
+@keyframes confetti{
+  to{transform:translateY(120vh) rotate(360deg)}
 }
 
-/* ===== PASSWORD SCREEN ===== */
-#password-screen{
+/* ================= PASSWORD ================= */
+#passwordScreen{
   position:fixed;
   inset:0;
-  z-index:10;
   display:flex;
-  align-items:center;
   justify-content:center;
-  background:rgba(5,6,15,.88);
-  backdrop-filter:blur(20px);
-}
-
-.password-box{
-  padding:40px 30px;
-  border-radius:28px;
-  background:rgba(255,255,255,.08);
-  box-shadow:0 30px 80px rgba(0,0,0,.6);
-  text-align:center;
-}
-
-.password-box h1{
-  background:linear-gradient(90deg,var(--gold),#fff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.password-box input{
-  width:240px;
-  padding:12px;
-  border-radius:16px;
-  border:none;
-  outline:none;
-  text-align:center;
-}
-
-.password-box button{
-  margin-top:20px;
-  padding:12px 26px;
-  border-radius:18px;
-  border:none;
-  cursor:pointer;
-  background:linear-gradient(90deg,var(--gold),#fff);
-}
-
-.error{
-  color:#ff9aa2;
-  margin-top:10px;
-  display:none;
-}
-
-/* ===== MAIN LAYOUT ===== */
-main{
-  position:relative;
-  z-index:2;
-  min-height:100vh;
-  display:grid;
-  grid-template-rows:auto 1fr auto;
-  padding:40px 24px;
-}
-
-header{text-align:center}
-
-header h1{
-  font-size:clamp(32px,6vw,52px);
-  font-weight:500;
-  background:linear-gradient(90deg,var(--gold),#fff);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-header h2{
-  margin-top:10px;
-  font-weight:300;
-  opacity:.85;
-}
-
-/* ===== CENTER ===== */
-.center{
-  display:flex;
-  flex-direction:column;
   align-items:center;
-  justify-content:center;
+  background:radial-gradient(circle,#2b0a55,#000);
+  z-index:999;
 }
 
-/* ===== CANDLE ===== */
-.candle-wrap{
-  position:relative;
-  width:70px;
-  height:240px;
-  cursor:pointer;
+.card{
+  width:340px;
+  padding:36px;
+  border-radius:26px;
+  background:linear-gradient(180deg,#0d1326,#04060f);
+  box-shadow:0 0 80px rgba(255,215,120,.35);
+  text-align:center;
+  animation:pop .8s ease;
 }
-
-.candle{
-  position:absolute;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:46px;
-  height:170px;
-  background:linear-gradient(to right,#f7f1e6,#eadfc8,#fff4dd);
-  border-radius:24px;
-  box-shadow:inset -6px 0 10px rgba(0,0,0,.25),
-             inset 6px 0 10px rgba(255,255,255,.5);
-}
-
-.wick{
-  position:absolute;
-  bottom:170px;
-  left:50%;
-  transform:translateX(-50%);
-  width:3px;
-  height:22px;
-  background:#222;
-}
-
-.flame{
-  position:absolute;
-  bottom:195px;
-  left:50%;
-  transform:translateX(-50%);
-  width:30px;
-  height:55px;
-  background:radial-gradient(
-    ellipse at center,
-    #fffbd5 0%,
-    #ffd54f 40%,
-    #ff9800 70%,
-    #ff5722 100%
-  );
-  border-radius:50%;
-  animation:flicker .14s infinite;
-  filter:drop-shadow(0 0 45px rgba(255,160,60,.9));
-}
-
-@keyframes flicker{
-  0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(1.1)}
-  100%{transform:translateX(-50%) scale(1)}
-}
-
-.smoke{
-  position:absolute;
-  bottom:200px;
-  left:50%;
-  width:18px;
-  height:18px;
-  background:rgba(200,200,200,.6);
-  border-radius:50%;
-  opacity:0;
-}
-
-.smoke.active{
-  animation:smoke 3.5s ease forwards;
-}
-
-@keyframes smoke{
-  from{opacity:.7;transform:translate(-50%,0) scale(1)}
-  to{opacity:0;transform:translate(-50%,-160px) scale(3)}
-}
-
-/* ===== POSTER ===== */
-.poster{
-  display:none;
-  width:100%;
-  max-width:520px;
-  margin-top:40px;
-  animation:reveal 1.6s ease forwards;
-}
-
-.poster img{
-  width:100%;
-  border-radius:32px;
-}
-
-@keyframes reveal{
-  from{opacity:0;transform:scale(.9)}
+@keyframes pop{
+  from{opacity:0;transform:scale(.8)}
   to{opacity:1;transform:scale(1)}
 }
 
-/* ===== FOOTER ===== */
-footer{
-  text-align:center;
+.card h1{
+  font-family:'Cinzel',serif;
+  letter-spacing:3px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin:18px 0;
+  border:none;
+  border-radius:16px;
+  background:#11162b;
+  color:#9ecbff;
+  font-size:1rem;
+}
+
+button{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:30px;
+  background:linear-gradient(90deg,#ffb703,#ffd36b);
+  font-weight:600;
+  cursor:pointer;
+  box-shadow:0 10px 30px rgba(255,200,80,.6);
+}
+
+/* ================= SECTIONS ================= */
+.hidden{display:none}
+section{text-align:center;padding:30px}
+
+/* ================= BANNER ================= */
+.banner{
+  margin:30px auto;
+  padding:24px;
+  background:linear-gradient(90deg,#0b1d3a,#1b3b6f,#0b1d3a);
+  border-radius:18px;
+  box-shadow:0 0 60px rgba(120,180,255,.35);
+}
+.banner h1{
+  font-family:'Cinzel',serif;
+  letter-spacing:5px;
+  text-shadow:0 0 30px gold;
+}
+
+/* ================= CAKE ================= */
+.cake{
+  width:260px;
+  margin:30px auto;
+}
+.candles{display:flex;gap:18px;justify-content:center}
+.candle{
+  width:12px;height:42px;background:#fff3d6;border-radius:6px;position:relative;
+}
+.flame{
+  position:absolute;top:-16px;left:50%;transform:translateX(-50%);
+  width:10px;height:16px;
+  background:radial-gradient(circle,#fff,#ff9f00);
+  border-radius:50%;
+  animation:flicker 1s infinite alternate;
+  cursor:pointer;
+}
+@keyframes flicker{to{transform:translateX(-50%) scale(1.3)}}
+
+.layer{margin:6px auto;border-radius:16px;position:relative}
+.layer::after{
+  content:"";
+  position:absolute;bottom:6px;left:50%;transform:translateX(-50%);
+  width:75%;height:6px;
+  background:radial-gradient(circle,#ffd36b 45%,transparent 46%);
+}
+.small{width:80px;height:42px;background:#ff9bbf}
+.medium{width:120px;height:52px;background:#e1c1ff}
+.large{width:170px;height:62px;background:#ff8fab}
+.base{
+  width:220px;height:72px;background:#8faaff;
+  border-radius:18px;cursor:pointer;
+}
+
+/* ================= FINAL PAGE ================= */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:16px;
   max-width:520px;
-  margin:40px auto 0;
-  font-size:16px;
-  line-height:1.6;
-  opacity:.9;
+  margin:30px auto;
+}
+.photo{
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 16px 40px rgba(0,0,0,.7);
+}
+.photo img{width:100%;height:100%;object-fit:cover}
+
+.wish{
+  margin-top:26px;
+  font-size:1.05rem;
+  line-height:1.8;
+  text-shadow:0 0 16px rgba(255,215,120,.5);
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<canvas id="fireworks"></canvas>
-<div class="balloons" id="balloons"></div>
+<script>
+/* DECOR GENERATORS */
+["circle","heart","star"].forEach(t=>{
+  for(let i=0;i<10;i++){
+    let d=document.createElement("div");
+    d.className="shape "+t;
+    d.innerHTML=t==="heart"?"♥":t==="star"?"✦":"";
+    d.style.left=Math.random()*100+"vw";
+    document.body.appendChild(d);
+  }
+});
+
+for(let i=0;i<40;i++){
+  let s=document.createElement("div");
+  s.className="sparkle";
+  s.style.left=Math.random()*100+"vw";
+  document.body.appendChild(s);
+}
+
+["#ff6f91","#6fa8ff","#ffd36b"].forEach(c=>{
+  for(let i=0;i<6;i++){
+    let b=document.createElement("div");
+    b.className="balloon";
+    b.style.background=c;
+    b.style.left=Math.random()*100+"vw";
+    document.body.appendChild(b);
+  }
+});
+
+for(let i=0;i<30;i++){
+  let c=document.createElement("div");
+  c.className="confetti";
+  c.style.background=`hsl(${Math.random()*360},100%,50%)`;
+  c.style.left=Math.random()*100+"vw";
+  document.body.appendChild(c);
+}
+</script>
 
 <!-- PASSWORD -->
-<div id="password-screen">
-  <div class="password-box">
-    <h1>Private Access</h1>
-    <input type="password" id="password" placeholder="Password">
-    <br>
-    <button onclick="unlock()">Unlock</button>
-    <div class="error" id="error">Wrong password</div>
+<div id="passwordScreen">
+  <div class="card">
+    <h1>Special Surprise 🔐</h1>
+    <input id="pass" type="password" placeholder="Enter password">
+    <button onclick="unlock()">Unlock 🎁</button>
   </div>
 </div>
 
-<main>
-  <header>
-    <h1>Happy Birthday</h1>
-    <h2>Amulya</h2>
-  </header>
+<!-- PAGE 1 -->
+<section id="cakePage" class="hidden">
+  <div class="banner"><h1>🎉 HAPPY BIRTHDAY AMULYA 🎉</h1></div>
+  <p>Blow all candles 🎂</p>
 
-  <section class="center">
-    <div class="candle-wrap" onclick="blow()">
-      <div class="flame" id="flame"></div>
-      <div class="wick"></div>
-      <div class="candle"></div>
-      <div class="smoke" id="smoke"></div>
+  <div class="cake">
+    <div class="candles">
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
+      <div class="candle"><div class="flame"></div></div>
     </div>
+    <div class="layer small"></div>
+    <div class="layer medium"></div>
+    <div class="layer large"></div>
+    <div class="layer base" id="cutCake"></div>
+  </div>
 
-    <div class="poster" id="poster">
-      <img src="poster.jpeg" alt="Birthday Poster">
-    </div>
-  </section>
+  <p id="status">5 candles remaining</p>
+</section>
 
-  <footer>
-  Enjoy your day, celebrate big, hope all your wishes come true, wishing you joy & laughter, happy year ahead!
-  </footer>
-</main>
+<!-- PAGE 2 -->
+<section id="finalPage" class="hidden">
+  <div class="banner"><h1>🎉 HAPPY BIRTHDAY AMULYA 🎉</h1></div>
+
+  <div class="gallery">
+    <div class="photo"><img src="pic1.jpg"></div>
+    <div class="photo"><img src="pic2.jpg"></div>
+    <div class="photo"><img src="pic3.jpg"></div>
+    <div class="photo"><img src="pic4.jpg"></div>
+  </div>
+
+  <div class="wish">
+    May your days sparkle brighter than fireworks,<br>
+    your smile glow like golden lights,<br>
+    and your life be filled with love & success 💙✨<br><br>
+    <b>Happy Birthday Amulya 🎂🎉</b>
+  </div>
+</section>
 
 <script>
-/* PASSWORD */
-const PASSWORD="9320943495";
+const CORRECT_PASSWORD="AMULYA123";
 function unlock(){
-  if(document.getElementById("password").value===PASSWORD){
-    document.getElementById("password-screen").style.display="none";
-  }else{
-    document.getElementById("error").style.display="block";
+  if(pass.value===CORRECT_PASSWORD){
+    passwordScreen.style.display="none";
+    cakePage.classList.remove("hidden");
   }
 }
 
-/* BALLOONS */
-const balloons=document.getElementById("balloons");
-const colors=["#ff6b6b","#ffd166","#06d6a0","#4dabf7","#c77dff"];
-
-function createBalloon(){
-  const b=document.createElement("div");
-  b.className="balloon";
-  b.style.left=Math.random()*100+"vw";
-  b.style.background=colors[Math.floor(Math.random()*colors.length)];
-  b.style.animationDuration=10+Math.random()*10+"s";
-  balloons.appendChild(b);
-  setTimeout(()=>b.remove(),20000);
-}
-setInterval(createBalloon,600);
-
-/* FIREWORKS */
-const canvas=document.getElementById("fireworks");
-const ctx=canvas.getContext("2d");
-function resize(){
-  canvas.width=innerWidth;
-  canvas.height=innerHeight;
-}
-resize();
-window.onresize=resize;
-
-function firework(x,y){
-  for(let i=0;i<40;i++){
-    ctx.fillStyle="#d4af37";
-    ctx.beginPath();
-    ctx.arc(x+Math.random()*60-30,y+Math.random()*60-30,2,0,Math.PI*2);
-    ctx.fill();
+/* Candle logic */
+let flames=document.querySelectorAll(".flame");
+let remaining=flames.length;
+flames.forEach(f=>{
+  f.onclick=()=>{
+    f.style.opacity=0;
+    remaining--;
+    status.innerText=remaining+" candles remaining";
   }
-}
-setInterval(()=>{
-  firework(Math.random()*canvas.width,Math.random()*canvas.height*.6);
-},1800);
+});
 
-/* CANDLE */
-function blow(){
-  document.getElementById("flame")?.remove();
-  document.getElementById("smoke").classList.add("active");
-  document.getElementById("poster").style.display="block";
-  document.getElementById("poster").scrollIntoView({behavior:"smooth"});
-}
+/* Cut cake */
+cutCake.onclick=()=>{
+  if(remaining===0){
+    cakePage.classList.add("hidden");
+    finalPage.classList.remove("hidden");
+  }else alert("Blow all candles first 🎂");
+};
 </script>
 
 </body>
 </html>
-
-
-

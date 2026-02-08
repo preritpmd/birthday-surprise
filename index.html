@@ -23,27 +23,61 @@ html,body{
   scroll-behavior:smooth;
 }
 
-/* BACKGROUND */
+/* ===== BACKGROUND ===== */
 .bg{
   position:fixed;
   inset:0;
   background:
     radial-gradient(circle at 20% 10%,#1a1d3a,transparent 60%),
     radial-gradient(circle at 80% 30%,#2a1b3d,transparent 55%),
-    radial-gradient(circle at 50% 80%,#11152d,transparent 60%),
-    linear-gradient(#05060f,#05060f);
+    radial-gradient(circle at 50% 80%,#11152d,transparent 60%);
   z-index:0;
 }
 
-/* FIREWORKS */
+/* ===== FIREWORKS ===== */
 canvas{
   position:fixed;
   inset:0;
   z-index:1;
-  opacity:.55;
+  opacity:.45;
 }
 
-/* PASSWORD SCREEN */
+/* ===== BALLOONS ===== */
+.balloons{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.balloon{
+  position:absolute;
+  bottom:-120px;
+  width:48px;
+  height:62px;
+  border-radius:50% 50% 48% 48%;
+  animation:floatUp linear infinite;
+  opacity:.85;
+}
+
+.balloon::after{
+  content:"";
+  position:absolute;
+  bottom:-35px;
+  left:50%;
+  width:2px;
+  height:35px;
+  background:rgba(255,255,255,.4);
+  transform:translateX(-50%);
+}
+
+@keyframes floatUp{
+  from{transform:translateY(0)}
+  to{transform:translateY(-130vh)}
+}
+
+/* ===== PASSWORD SCREEN ===== */
 #password-screen{
   position:fixed;
   inset:0;
@@ -51,7 +85,7 @@ canvas{
   display:flex;
   align-items:center;
   justify-content:center;
-  background:rgba(5,6,15,.85);
+  background:rgba(5,6,15,.88);
   backdrop-filter:blur(20px);
 }
 
@@ -76,7 +110,6 @@ canvas{
   border:none;
   outline:none;
   text-align:center;
-  font-size:16px;
 }
 
 .password-box button{
@@ -94,7 +127,7 @@ canvas{
   display:none;
 }
 
-/* MAIN LAYOUT */
+/* ===== MAIN LAYOUT ===== */
 main{
   position:relative;
   z-index:2;
@@ -104,7 +137,6 @@ main{
   padding:40px 24px;
 }
 
-/* HEADER */
 header{text-align:center}
 
 header h1{
@@ -121,7 +153,7 @@ header h2{
   opacity:.85;
 }
 
-/* CENTER */
+/* ===== CENTER ===== */
 .center{
   display:flex;
   flex-direction:column;
@@ -129,7 +161,7 @@ header h2{
   justify-content:center;
 }
 
-/* CANDLE */
+/* ===== CANDLE ===== */
 .candle-wrap{
   position:relative;
   width:70px;
@@ -179,18 +211,6 @@ header h2{
   filter:drop-shadow(0 0 45px rgba(255,160,60,.9));
 }
 
-.flame::after{
-  content:"";
-  position:absolute;
-  bottom:12px;
-  left:50%;
-  transform:translateX(-50%);
-  width:14px;
-  height:26px;
-  background:radial-gradient(circle,#fff,#fff59d,transparent);
-  border-radius:50%;
-}
-
 @keyframes flicker{
   0%{transform:translateX(-50%) scale(1)}
   50%{transform:translateX(-50%) scale(1.1)}
@@ -217,7 +237,7 @@ header h2{
   to{opacity:0;transform:translate(-50%,-160px) scale(3)}
 }
 
-/* POSTER */
+/* ===== POSTER ===== */
 .poster{
   display:none;
   width:100%;
@@ -236,7 +256,7 @@ header h2{
   to{opacity:1;transform:scale(1)}
 }
 
-/* FOOTER */
+/* ===== FOOTER ===== */
 footer{
   text-align:center;
   max-width:520px;
@@ -252,6 +272,7 @@ footer{
 
 <div class="bg"></div>
 <canvas id="fireworks"></canvas>
+<div class="balloons" id="balloons"></div>
 
 <!-- PASSWORD -->
 <div id="password-screen">
@@ -267,7 +288,7 @@ footer{
 <main>
   <header>
     <h1>Happy Birthday</h1>
-    <h2>Dear Amulya</h2> <!-- CHANGE NAME -->
+    <h2>Dear Alex</h2>
   </header>
 
   <section class="center">
@@ -284,27 +305,40 @@ footer{
   </section>
 
   <footer>
-    May your life be filled with warmth, clarity, and quiet happiness.
-    May every step ahead feel meaningful and beautiful.
+    May your life be filled with warmth, joy and beautiful moments.
+    May happiness follow you always.
   </footer>
 </main>
 
 <script>
 /* PASSWORD */
-const PASSWORD="9320943495";
+const PASSWORD="birthday123";
 function unlock(){
-  const input=document.getElementById("password").value;
-  if(input===PASSWORD){
+  if(document.getElementById("password").value===PASSWORD){
     document.getElementById("password-screen").style.display="none";
   }else{
     document.getElementById("error").style.display="block";
   }
 }
 
+/* BALLOONS */
+const balloons=document.getElementById("balloons");
+const colors=["#ff6b6b","#ffd166","#06d6a0","#4dabf7","#c77dff"];
+
+function createBalloon(){
+  const b=document.createElement("div");
+  b.className="balloon";
+  b.style.left=Math.random()*100+"vw";
+  b.style.background=colors[Math.floor(Math.random()*colors.length)];
+  b.style.animationDuration=10+Math.random()*10+"s";
+  balloons.appendChild(b);
+  setTimeout(()=>b.remove(),20000);
+}
+setInterval(createBalloon,600);
+
 /* FIREWORKS */
 const canvas=document.getElementById("fireworks");
 const ctx=canvas.getContext("2d");
-
 function resize(){
   canvas.width=innerWidth;
   canvas.height=innerHeight;
@@ -313,36 +347,16 @@ resize();
 window.onresize=resize;
 
 function firework(x,y){
-  const colors=["#d4af37","#ffffff","#c77dff"];
-  const p=[];
-  for(let i=0;i<50;i++){
-    p.push({
-      x,y,
-      a:Math.random()*Math.PI*2,
-      s:Math.random()*4+1,
-      r:Math.random()*2+1,
-      c:colors[Math.floor(Math.random()*colors.length)],
-      l:90
-    });
+  for(let i=0;i<40;i++){
+    ctx.fillStyle="#d4af37";
+    ctx.beginPath();
+    ctx.arc(x+Math.random()*60-30,y+Math.random()*60-30,2,0,Math.PI*2);
+    ctx.fill();
   }
-  (function anim(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    p.forEach(o=>{
-      o.x+=Math.cos(o.a)*o.s;
-      o.y+=Math.sin(o.a)*o.s;
-      o.l--;
-      ctx.beginPath();
-      ctx.arc(o.x,o.y,o.r,0,Math.PI*2);
-      ctx.fillStyle=o.c;
-      ctx.fill();
-    });
-    if(p.some(o=>o.l>0))requestAnimationFrame(anim);
-  })();
 }
-
 setInterval(()=>{
   firework(Math.random()*canvas.width,Math.random()*canvas.height*.6);
-},2000);
+},1800);
 
 /* CANDLE */
 function blow(){
